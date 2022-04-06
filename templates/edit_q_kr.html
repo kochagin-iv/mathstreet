@@ -1,0 +1,51 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="/media/checkbox_style.css" media="screen">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="container">
+            <h2 style="text-align: center">Изменение задания в работе {{ kr.name }}</h2>
+        <p>
+            {{ form.media }}
+            {{ form.description }}
+            {{ form.points | as_crispy_field}}
+        </p>
+        {% if item.ans_file %}
+            <p>
+                <div class="inputGroup" style="width: 50%">
+                    <input id = 'ans_file' name = 'ans_file' type="checkbox" checked/>
+                    <label for = 'ans_file'> Ответ - файл</label>
+                </div>
+            </p>
+        {% else %}
+            <p>
+            <div class="inputGroup" style="width: 50%">
+                <input id = 'ans_file' name = 'ans_file' type="checkbox"/>
+                <label for = 'ans_file'> Ответ - файл</label>
+            </div>
+        </p>
+        {% endif %}
+        {% if item.ans_text %}
+            <p>
+                <div class="inputGroup" style="width: 50%">
+                    <input id = 'ans_text' name = 'ans_text' type="checkbox" checked/>
+                    <label for = 'ans_text'> Ответ - текст</label>
+                </div>
+            </p>
+        {% else %}
+            <p>
+            <div class="inputGroup" style="width: 50%">
+                <input id = 'ans_text' name = 'ans_text' type="checkbox"/>
+                <label for = 'ans_text'> Ответ - текст</label>
+            </div>
+        </p>
+        {% endif %}
+        <p>
+        {{ form.corr_ans|as_crispy_field }}
+        </p>
+            <input type="submit" class="btn btn-primary btn-lg btn-block" value="Изменить задание"></input>
+        </div>
+    </form>
+{% endblock %}

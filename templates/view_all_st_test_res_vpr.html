@@ -1,0 +1,33 @@
+{% extends 'main.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+    <div class="container">
+    <div class="row justify-content-center">
+            <h1> Результаты {{ test.name }} </h1>
+    </div>
+    <div class="row justify-content-center">
+        <h3> Работу выполнило {{ kol_already }} </h3>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Фамилия и имя</th>
+          <th scope="col">Результат</th>
+          <th scope="col">Посмотреть работу</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in all_res %}
+            <tr>
+          <th scope="row">{{ i.sr }} {{ i.nm }}</th>
+          <td>{{ i.res }} / {{ i.kol }}</td>
+          <td><a href="/test_view_res/{{ i.t_id }}" style="text-decoration: none; color: black"><button type="button" class="btn btn-primary btn-lg"> Посмотреть</button></a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+{% endblock %}

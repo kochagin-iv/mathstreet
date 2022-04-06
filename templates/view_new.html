@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    <link rel="stylesheet" href="/media/news.css">
+    <link rel="stylesheet" href="/media/view_new.css">
+    <link href="/media/font-awesome.min.css" rel="stylesheet">
+
+    <div class="resume-mini text-center">
+        <h2>{{ new.title }}</h2>
+        <p>{{ new.short_text }}</p>
+        <p>{{ new.text|safe }}</p>
+        {% if new.file.name != '' %}
+            <a href="/media/{{ new.file }}" target="_blank" class="btn btn-green">
+                Посмотрите приложенный файл
+                <i class="fa fa-file"></i>
+            </a>
+        {% endif %}
+        {% if user.is_superuser %}
+            <div class="row" style="margin-top: 10%">
+                <a href="/edit_new/{{ new.id }}" class="btn btn-blue" style="width: 50%">
+                    Редактировать
+                    <i class="fa fa-refresh"></i>
+                </a>
+                <a href="/delete_new/{{ new.id }}" class="btn btn-red" style="width: 50%">
+                    Удалить <i class="fa fa-trash"></i>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

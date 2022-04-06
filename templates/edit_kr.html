@@ -1,0 +1,93 @@
+{% extends 'main.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="/media/checkbox_style.css" media="screen">
+    <p>
+    <h2 style="text-align: center">
+        Страница редактирования работы {{ kr.name }}
+    </h2>
+    </p>
+ <div class="container">
+ <div class="row">
+  <div class="col-lg-4 d-flex justify-content-center">
+      <form action="" method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <form style="width: 70%">
+            <p>
+                    <h2 style="text-align: center">Выбор групп</h2>
+                    {% for group in groups %}
+                      <div class="inputGroup">
+                        {% if group.status == 1 %}
+                            <input id={{ group.idd }} name={{ group.idd }} type="checkbox" checked/>
+                        {% else %}
+                            <input id={{ group.idd }} name={{ group.idd }} type="checkbox"/>
+                        {% endif %}
+
+                        <label for={{ group.idd }}>{{ group.name }}</label>
+                      </div>
+                    {% endfor %}
+
+            </p>
+
+        <input type="submit" class="btn btn-primary btn-lg btn-block" value="Изменить"></input>
+      </form>
+      </form>
+  </div>
+
+  <div class="col-lg-8 d-flex" style="top: 0">
+      <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-lg-4">
+                <a href="/add_kr_ex/{{ kr.id }}" class="btn btn-primary btn-lg btn-block" role="button">Добавить задание в работу</a>
+            </div>
+            <div class="col-lg-4">
+            <form method="post" action="">
+                    {% csrf_token %}
+                        <button type="submit" class="btn btn-warning btn-lg btn-block" name="copy">Копировать работу</button>
+                    </form>
+            </div>
+            <div class="col-lg-4">
+                <a href="/list_of_done/{{ kr.id }}" class="btn btn-dark btn-lg btn-block">Список выполнивших</a>
+            </div>
+        </div>
+    <div class="w-100"></div>
+    <div class="col"><br>Список заданий(уже добавлено {{ len_ex }}):</div>
+            <div class="w-100"></div>
+        <div class="col">
+        <br>
+                {% for i in ex %}
+                    <a style="text-decoration: none; color: black" href="/edit_kr/{{ kr.id }}/{{ i.id }}">
+                        <div class="jumbotron d-flex justify-content-center" style="text-align: center">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    {{ i.description|safe }}
+                                </div>
+                                <div class="row justify-content-center">
+                                    {{ i.file.name|safe }}
+                                </div>
+                                <div class="row justify-content-center" style="font-style: oblique">
+                                    Верный ответ: {{ i.corr_ans }}
+                                </div>
+
+                            </div>
+
+                    </div>
+                    </a>
+                    <form method="post" action="" style="margin-top: -50px">
+                    {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-lg btn-block" name="pk" value={{ i.id }}>Удалить</button>
+                    </form>
+                    <br>
+                    <br>
+                {% endfor %}
+        </div>
+      </div>
+    </div>
+    </div>
+ </div>
+ </div>
+
+{% endblock %}

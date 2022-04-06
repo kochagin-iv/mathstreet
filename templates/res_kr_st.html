@@ -1,0 +1,42 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container" id="kol_err" value="{{ kol_err }}">
+        <div class="row d-flex justify-content-center" id="corr" value="{{ kol_corr }}">
+            <H3>Ваш результат: {{ kol_corr }} / {{ kol }} правильных ответов</H3>
+        </div>
+        <div class="row d-flex justify-content-center" id="file" value="{{ kol_file }}">
+  <script src="https://www.google.com/jsapi"></script>
+
+  <script>
+   google.load("visualization", "1", {packages:["corechart"]});
+   google.setOnLoadCallback(drawChart);
+   function drawChart() {
+       var kol_corr = Number(document.getElementById("corr").getAttribute('value'));
+       var kol_err = Number(document.getElementById("kol_err").getAttribute('value'));
+       var kol_file = Number(document.getElementById("file").getAttribute('value'));
+    var data = google.visualization.arrayToDataTable([
+     ['Вердикт', 'Количество заданий'],
+     ['Неверно', kol_err],
+     ['Верно', kol_corr],
+     ['На проверке', kol_file],
+    ]);
+
+    var options = {
+     title: 'Результат',
+     is3D: true,
+     pieResidueSliceLabel: 'Остальное',
+        backgroundColor: 'transparent',
+        fontSize: 20,
+        colors: ['#FF0000', '#008000', '#FFD700']
+    };
+      var chart = new google.visualization.PieChart(document.getElementById('res'));
+     chart.draw(data, options);
+   }
+  </script>
+
+  <div id="res" style="width: 100%"></div>
+    </div>
+    </div>
+{% endblock %}

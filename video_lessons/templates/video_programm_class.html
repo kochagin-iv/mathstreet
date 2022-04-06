@@ -1,0 +1,54 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <link rel="stylesheet" href="../../media/video_programm_class_ol_style.css">
+    <link rel="stylesheet" href="../../media/all_video_lessons.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <div class="container">
+        <div class="row justify-content-center">
+            <h2 class="h2" style="font-family: ‘Inder’, sans-serif; line-height: 28px; margin-top: 2%;">
+                {{ class }} класс {{ subj }}
+            </h2>
+        </div>
+        <div class="row" style="margin-top: 5%">
+            <div class="col-lg-3">
+                <dl class="list_classes">
+                    <a href="/video_lessons/8/alg">
+                        <dt>8</dt>
+                        <dd>Алгебра</dd>
+                    </a>
+                    <a href="/video_lessons/8/geo">
+                        <dt>8</dt>
+                        <dd>Геометрия</dd>
+                    </a>
+                    <a href="/video_lessons/11/alg">
+                        <dt>11</dt>
+                        <dd>Алгебра</dd>
+                    </a>
+                    <a href="/video_lessons/11/geo">
+                        <dt>11</dt>
+                        <dd>Геометрия</dd>
+                    </a>
+                </dl>
+            </div>
+            <div class="col-lg-9">
+                <div class="jumbotron">
+                    <ol style="margin-top: -5%; margin-bottom: -5%">
+                        {% for video in videos %}
+                            <a href="/video_lessons/{{ video.id }}" style="color: #000!important;text-decoration: none"><li>{{ video.name }}</li></a>
+                        {% endfor %}
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

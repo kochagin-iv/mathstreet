@@ -1,0 +1,83 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container">
+    <div class="row justify-content-center">
+        <h3>{{ group.name }}</h3>
+    </div>
+    <div class="row justify-content-center">
+        <form action="" method="post" style="width: 100%">
+            <h6 >{{ change_form|crispy }}</h6>
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary" name="pk_group_change" value={{ group_id }}> Сохранить</button>
+        </form>
+    </div>
+    <div class="row justify-content-center" style="margin-top: 5%">
+        <table class="table table-success" >
+          <thead align="center">
+            <tr>
+              <th scope="col">№</th>
+              <th scope="col">Имя</th>
+              <th scope="col">Фамилия</th>
+              <th scope="col">Username</th>
+              <th scope="col">Удалить из группы</th>
+
+            </tr>
+          </thead>
+          <tbody align="center">
+          {% for user in users_in_group %}
+            <tr>
+              <th scope="row">1</th>
+              <td>{{ user.first_name }}</td>
+              <td>{{ user.last_name }}</td>
+              <td>{{ user.username }}</td>
+                <td>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary btn-danger" name="pk_del" value={{ user.id }}>Удалить</button>
+                    </form>
+                </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+    </div>
+    </div>
+    <div class="container" style="margin-top: 10%">
+    <div class="row">
+        <table class="table table-primary">
+          <thead align="center">
+            <tr>
+              <th scope="col">№</th>
+              <th scope="col">Имя</th>
+              <th scope="col">Фамилия</th>
+              <th scope="col">Username</th>
+              <th scope="col">Добавить в группу</th>
+
+            </tr>
+          </thead>
+          <tbody align="center">
+          {% for user in no_users_in_group %}
+            <tr>
+              <th scope="row">1</th>
+              <td>{{ user.first_name }}</td>
+              <td>{{ user.last_name }}</td>
+              <td>{{ user.username }}</td>
+                <td>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary btn-success" name="pk_add" value={{ user.id }}>Добавить</button>
+                    </form>
+                </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+    </div>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary btn-danger" name="pk_group_del" value={{ group_id }}>Удалить группу</button>
+    </form>
+    </div>
+{% endblock %}

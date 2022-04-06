@@ -1,0 +1,35 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+
+{% block content %}
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.min.js"></script>
+      <script type="text/javascript" src="/media/sketch.js"></script>
+      <div id="test" value={{ time }}></div>
+    <div class="container" style="position: sticky; top: 0" >
+        <h2 style="text-align: center">Оставшееся время: <a id="timer" style="font-size: 30px">______</a></h2>
+    </div>
+    <form action="" method="post" name="form" id="form">
+    {% csrf_token %}
+    {% for quest in quests %}
+        <div class="container">
+        <div class="jumbotron">
+            <H2 style="text-align: center; text-decoration-style: inherit">Вопрос {{  quest.kol }}</H2>
+                <p class="lead">
+                    {{ quest.qst.description | safe }}
+                </p>
+
+            {{ quest.form | crispy }}
+        </div>
+        </div>
+    {% endfor %}
+    <div class="container">
+    <div class="d-flex justify-content-center">
+        <button type="submit" class="touch btn btn-primary btn-lg" style="left: 50%;" onclick="this.parentNode.submit();">Завершить выполнение теста</button>
+    </div>
+    </div>
+    </form>
+{% endblock %}
+

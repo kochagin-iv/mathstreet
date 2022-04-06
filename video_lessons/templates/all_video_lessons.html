@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+      <link rel="stylesheet" href="../../media/all_video_lessons.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <div class="container">
+        <div class="row" style="margin-top: 5%">
+            <div class="col-lg-3">
+                <dl class="list_classes">
+                    <a href="/video_lessons/8/alg">
+                        <dt>8</dt>
+                        <dd>Алгебра</dd>
+                    </a>
+                    <a href="/video_lessons/8/geo">
+                        <dt>8</dt>
+                        <dd>Геометрия</dd>
+                    </a>
+                    <a href="/video_lessons/11/alg">
+                        <dt>11</dt>
+                        <dd>Алгебра</dd>
+                    </a>
+                    <a href="/video_lessons/11/geo">
+                        <dt>11</dt>
+                        <dd>Геометрия</dd>
+                    </a>
+                </dl>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

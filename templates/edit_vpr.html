@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container">
+  <div class="row justify-content-md-center">
+      <form action="" method="POST">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form }}
+        <input type="submit" class="btn btn-primary btn-lg btn-block" value="Изменить"></input>
+      </form>
+
+    </div>
+    </div>
+{% endblock %}

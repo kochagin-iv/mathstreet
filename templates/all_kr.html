@@ -1,0 +1,42 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Название работы</th>
+          <th scope="col">Описание</th>
+          <th scope="col">Выполнить работу</th>
+            {% if user.is_authenticated %}
+              <th scope="col">Результаты</th>
+              <th scope="col">Удалить</th>
+              <th scope="col">Редактировать</th>
+            {% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in all_kr %}
+            <tr>
+          <th scope="row">{{ i.name }}</th>
+          <td>{{ i.description }}</td>
+          <td><a href="/kr_fio/{{ i.id }}" style="text-decoration: none; color: black"><button type="button" class="btn btn-primary btn-lg">Пройти {{ i.name }}</button></a></td>
+                {% if user.is_authenticated %}
+                    <td><a href="/all_res_kr/{{ i.id }}" style="text-decoration: none; color: black"><button type="button" class="btn btn-primary btn-lg">Результаты</button></a></td>
+                        <td>
+                            <form method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-lg" name="pk" value={{ i.id }}>Удалить</button>
+                            </form>
+                        </td>
+                    <td>
+                        <a href="/edit_kr/{{ i.id }}"><button type="button" class="btn btn-primary btn-lg">Редактировать работу</button></a>
+                    </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+{% endblock %}

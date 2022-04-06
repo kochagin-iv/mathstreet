@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <br>
+    <div class="row justify-content-md-center">
+        <h3> Список всех заданий ВПР по номеру {{ num }}</h3>
+    </div>
+    {% for quest in q %}
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <a style="text-decoration: none; color: black" href ='/edit_vpr/{{ quest.id }}'>
+                    <p> {{ quest.description | safe }}
+                    Ответ {{ quest.corr_ans }}
+                    </p>
+                </a>
+            </div>
+        </div>
+
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    
+        <br>
+                <div class="row justify-content-md-center">
+    <h1> Список заданий ВПР </h1>
+                </div>
+    {% for num in num_v %}
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <a style="text-decoration: none; color: black" href ='/view_vpr/{{ num }}'> Задание {{ num }} </a>
+                <br>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="container">
+    <div class="d-flex justify-content-center">
+        <H3> Результат {{ sr }} {{ nm }}: {{ kol_corr }} / {{ kol_q }} правильных ответов</H3>
+    </div>
+    </div>
+    {% for quest in quests %}
+        <div class="container">
+        {% if quest.ans.is_corr == 0 %}
+            <div style="background-color: #FFC0CB" class="jumbotron">
+                <H2 style="text-align: center; text-decoration-style: inherit">Вопрос {{  quest.kol }}</H2>
+                    <p class="lead">
+                        {{ quest.qst.description | safe }}
+                    </p>
+                <div>
+                Ответ ученика {{ quest.my_ans }}
+                </div>
+                <div>
+                Верный ответ {{ quest.corr_ans }}
+                </div>
+                {% csrf_token %}
+                <form method="post">
+                <div class="container">
+                    <div class="d-flex justify-content-center">
+                                        {% csrf_token %}
+
+                        <input type="submit" style="left: 50%;" name="{{ quest.ans.id }}" class="btn btn-primary btn-lg" value="Засчитать ответ, как верный">
+                    </div>
+                </div>
+                </form>
+            </div>
+        {% else %}
+            <div style="background-color: darkseagreen" class="jumbotron">
+                <H2 style="text-align: center; text-decoration-style: inherit">Вопрос {{  quest.kol }}</H2>
+                    <p class="lead">
+                        {{ quest.qst.description | safe }}
+                    </p>
+                <div>
+                Ответ ученика {{ quest.my_ans }}
+                </div>
+                <div>
+                Верный ответ {{ quest.corr_ans }}
+                </div>
+                 {% csrf_token %}
+                <form method="post">
+                <div class="container">
+                    <div class="d-flex justify-content-center">
+                                        {% csrf_token %}
+
+                        <input type="submit" style="left: 50%;" name="{{ quest.ans.id }}" class="btn btn-primary btn-lg" value="Засчитать ответ, как неверный">
+                    </div>
+                </div>
+                </form>
+            </div>
+        {% endif %}
+        </div>
+    {% endfor %}
+    <div class="container">
+    <div class="d-flex justify-content-center">
+        <a href = '/' style="left: 50%;" class="btn btn-primary btn-lg"> Вернуться на главную страницу</a>
+    </div>
+    </div>
+
+{% endblock %}

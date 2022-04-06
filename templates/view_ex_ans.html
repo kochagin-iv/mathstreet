@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+        <div class="container">
+            <H2 style="text-align: center; text-decoration-style: inherit"> {{  ex.name }}</H2>
+            <H4>Выполнил {{ ans_ex.surname }} {{ ans_ex.name }}</H4><br>
+            <input type="submit" class="btn btn-primary btn-lg btn-block" value="Отметить проверенным"><br>
+            <div class="jumbotron">
+                {{ ans_ex.media }}
+                {{ ans_ex.description | safe }}
+            </div>
+            <p>
+            {% if ans_ex.file != '' %}
+                <H4>Прикрепленный файл</H4> <br>
+                    <a href="/media/{{ ans_ex.file }}"> Посмотреть файл</a>
+                </p>
+            {% endif %}
+        </div>
+    </form>
+{% endblock %}

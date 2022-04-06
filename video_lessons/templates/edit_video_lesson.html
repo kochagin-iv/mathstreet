@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="/media/checkbox_style.css" media="screen">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="container">
+            <h2 style="text-align: center">Изменение видео {{ video.name }}</h2>
+            <p>
+                {{ form|crispy }}
+            </p>
+            <input type="submit" class="btn btn-primary btn-lg btn-block" value="Изменить видео"></input>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,162 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <link href="../../media/bootstrap.min.css" rel="stylesheet">
+    <!-- Font awesome CSS -->
+    <link href="../../media/font-awesome.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="../../media/all_video_lessons.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+
+    <link href="../../media/style_view_lesson.css" rel="stylesheet">
+    <div class="container">
+        <div class="row justify-content-center">
+            <h2 class="h2" style="font-family: ‘Inder’, sans-serif; line-height: 28px; margin-top: 2%;">
+                {{ class }} класс {{ subj }}
+            </h2>
+        </div>
+        <div class="row justify-content-center">
+            <h3 class="h3" style="font-family: ‘Inder’, sans-serif; line-height: 28px; margin-top: 2%;">
+                {{ lesson.name }}
+            </h3>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row" style="margin-top: 5%">
+            <div class="col-lg-2">
+                <dl class="list_classes">
+                    <a href="/video_lessons/8/alg">
+                        <dt>8</dt>
+                        <dd>Алгебра</dd>
+                    </a>
+                    <a href="/video_lessons/8/geo">
+                        <dt>8</dt>
+                        <dd>Геометрия</dd>
+                    </a>
+                    <a href="/video_lessons/11/alg">
+                        <dt>11</dt>
+                        <dd>Алгебра</dd>
+                    </a>
+                    <a href="/video_lessons/11/geo">
+                        <dt>11</dt>
+                        <dd>Геометрия</dd>
+                    </a>
+                </dl>
+            </div>
+            <div class="col-lg-10">
+                <div class="ui-220">
+				<div class="row">
+						<!-- Item -->
+						<div class="ui-item clearfix">
+							<!-- Nav tabs -->
+							<ul class="clearfix bg-red">
+								<!-- Annotation -->
+								<li class="active"><a href="/video_lessons/{{ lesson.id }}#annotation" data-toggle="tab">Конспект</a></li>
+								<!-- Video -->
+								<li><a href="/video_lessons/{{ lesson.id }}#video" data-toggle="tab">Видео</a></li>
+								<!-- Test -->
+								<li><a href="/video_lessons/{{ lesson.id }}#test" data-toggle="tab">Тест</a></li>
+								<!-- Exam -->
+								<li><a href="/video_lessons/{{ lesson.id }}#exam" data-toggle="tab">Контрольная</a></li>
+							</ul>
+
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<!-- Tab Pane -->
+								<div class="tab-pane fade in active" id="annotation">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-10">
+                                             <span id="aaa" name="{{ lesson.annotation_file }}">
+
+                                             </span>
+                                                {% if user.is_superuser %}
+
+                                                    <h3 style=" font-weight: 300; font-size: 25px; text-align: center">
+                                                        <a href="/edit_video_lesson/{{ lesson.id }}/" style="color: #000 !important;
+                                                        text-decoration: none">
+                                                            {{ lesson.name }}
+                                                        </a>
+                                                    </h3>
+                                                {% else %}
+
+                                                {% endif %}
+
+                                            </div>
+                                        </div>
+                                        <div class="row" style="width: 100%" align="middle">
+                                            <!--<div class="col-lg-12">
+                                                <iframe src="{{ lesson.link }}" width="720" height="480" allowfullscreen="true"></iframe>
+                                            </div>-->
+                                            <div class="col-lg-10">
+                                                <button class="btn" id="prev-page">
+                                                    <i class="fas fa-arrow-circle-left"></i> Предыдущая страница
+                                                  </button>
+                                                  <button class="btn" id="next-page">
+                                                    Следующая страница <i class="fas fa-arrow-circle-right"></i>
+                                                  </button>
+                                                  <span class="page-info">
+                                                    Страница <span id="page-num"></span> из <span id="page-count"></span>
+                                                  </span>
+                                            </div>
+                                            <div class="col-lg-10">
+                                            <canvas id="pdf-render" style="width: 100%"></canvas>
+
+                                            <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+                                            <script src="../../media/pdf_reader.js"></script>
+                                            </div>
+                                        </div>
+                                    </div>
+								</div>
+								<!-- Tab Panel -->
+								<div class="tab-pane fade" id="video">
+									<!-- Heading -->
+									<div class="row" style="width: 100%" align="middle">
+                                            <div class="col-lg-12">
+                                                <iframe src="{{ lesson.link }}" width="720" height="480" allowfullscreen="true"></iframe>
+                                            </div>
+                                    </div>
+								</div>
+								<!-- Tab Panel -->
+								<div class="tab-pane fade" id="test">
+									<!-- Heading -->
+									<h3><a href="/video_lessons/{{ lesson.id }}#"><i class="fa fa-recycle red"></i> Esse Cillum</a></h3>
+									<!-- Paragraph -->
+									<p>Ut enim ad minim veniam, quis nostrud exerc itation ullamco laboris nisi laboris nisi  ut aliquip Ut enim ad minim veniam, quis nostrud exerc itation ullamco laboris nisi laboris nisi .</p>
+								</div>
+								<!-- Tab Panel -->
+								<div class="tab-pane fade" id="exam">
+									<!-- Heading -->
+									<h3><a href="/video_lessons/{{ lesson.id }}#"><i class="fa fa-share-alt red"></i> Cillum Dolore</a></h3>
+									<!-- Paragraph -->
+									<p>Ut enim ad minim veniam, quis nostrud exerc itation ullamco laboris nisi laboris nisi  ut aliquip Ut enim ad minim veniam, quis nostrud exerc itation ullamco laboris nisi laboris nisi .</p>
+								</div>
+							</div>
+						</div>
+                </div>
+                </div>
+
+
+
+
+                <div class="jumbotron">
+
+                </div>
+            </div>
+    </div>
+    </div>
+    <script src="../../media/js/jquery.js"></script>
+		<!-- Bootstrap JS -->
+		<script src="../../media/js/bootstrap.min.js"></script>
+		<!-- Placeholder JS -->
+		<script src="../../media/js/placeholder.js"></script>
+		<!-- Respond JS for IE8 -->
+		<script src="../../media/js/respond.min.js"></script>
+		<!-- HTML5 Support for IE -->
+		<script src="../../media/js/html5shiv.js"></script>
+{% endblock content %}

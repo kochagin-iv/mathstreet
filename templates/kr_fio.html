@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+    <div class="container">
+        <H2 style="text-align: center">Работа {{ kr.name }}</H2><br>
+        <h4>Внимание, работу можно выполнить только 1 раз!</h4><br>
+        <h5>Ограничение по времени {{ kr.time }} {{ word_minut }}!</h5>
+        <font><p style="font-size: 20px">Инструкция к тесту<br>
+        Ответ в задании запишите в поле со словом «Ваш ответ».<br>
+        Ответы записываются в виде целого числа или конечной десятичной дроби (перед и после знака «-» не ставится пробел).<br>
+            В записи десятичных дробей используется десятичная запятая.</font>
+      <form action="" method="POST">
+            {% csrf_token %}
+            {{ form | crispy}}
+        <input type="submit" class="btn btn-primary btn-lg btn-block" value="Начать выполнение работы"></input>
+      </form>
+    </div>
+
+{% endblock %}

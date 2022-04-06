@@ -1,0 +1,37 @@
+{% extends 'main.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="../media/checkbox_style.css" media="screen">
+    <h2 style="text-align: center">Создать работу</h2>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <p>
+                {{ create_form.name|as_crispy_field }}
+                </p>
+                <p>
+                {{  create_form.description|as_crispy_field}}
+                </p>
+                <p>
+                {{ create_form.time|as_crispy_field}}
+                </p>
+                <input type="submit" class="btn btn-primary btn-lg btn-block" value="Добавить работу"></input>
+            </form>
+        </div>
+
+    </div>
+
+
+  <!--<h2>Radio Buttons</h2>
+  <div class="inputGroup">
+    <input id="radio1" name="radio" type="radio"/>
+    <label for="radio1">Yes</label>
+  </div>
+  <div class="inputGroup">
+    <input id="radio2" name="radio" type="radio"/>
+    <label for="radio2">No</label>
+  </div>-->
+
+{% endblock %}

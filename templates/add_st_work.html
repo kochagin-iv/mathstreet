@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container">
+    <div class="row justify-content-md-center">
+      <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.media }}
+            <p>
+                {{ form.name|as_crispy_field }}
+            </p>
+            <p>
+                {{ form.description|as_crispy_field }}
+            </p>
+            <p>
+            {{ form.file |as_crispy_field }}
+            </p>
+        <div class="col-lg-4">
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Добавить задание</button>
+      </form>
+
+    </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="/media/checkbox_style.css" media="screen">
+    <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="container">
+        <h2 style="text-align: center">Добавление задания в работу {{ kr.name }}</h2>
+        <p>
+        {{ form.media }}
+        {{ form.description }}
+        </p>
+        <p>
+        {{ form.corr_ans|as_crispy_field }}
+        </p>
+        <p>
+        {{ form.file|as_crispy_field }}
+        </p>
+
+        <p>
+        {{ form.points|as_crispy_field }}
+
+        </p>
+        <p>
+            <div class="inputGroup" style="width: 50%">
+                <input id = 'ans_file' name = 'ans_file' type="checkbox"/>
+                <label for = 'ans_file'> Ответ - файл</label>
+
+            </div>
+            <div class="inputGroup" style="width: 50%">
+                <input id = 'ans_text' name = 'ans_text' type="checkbox"/>
+                <label for = 'ans_text'> Ответ - текст</label>
+
+            </div>
+
+        </p>
+        <input type="submit" class="btn btn-primary btn-lg btn-block" value="Добавить задание"></input>
+    </div>
+    </form>
+{% endblock %}

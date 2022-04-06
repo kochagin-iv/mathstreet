@@ -1,0 +1,216 @@
+{% extends 'main.html' %}
+
+{% block content %}
+        <link rel="stylesheet" type="text/css" href="../media/style_new_works.css/?d">
+        <link rel="stylesheet" type="text/css" href="../media/home_hello.css/?ddfdcsdscdrfdfsdddsdwdddddsdfw">
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+        <link rel="stylesheet" href="../media/OwlCarousel/dist/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="../media/OwlCarousel/dist/assets/owl.theme.default.min.css">        <!--<div class="container justify-content-center">
+            {% if user.is_authenticated %}
+                <div class="content">
+                  <div class="content__container">
+
+
+                    <ul class="content__container__list" style="text-align: center">
+                        <li class="content__container__list__item">Здравствуйте!</li>
+                      <li class="content__container__list__item">{{ my_user.first_name }}, приветствуем Вас!</li>
+                      <li class="content__container__list__item">Спасибо, что зашли на сайт!</li>
+                      <li class="content__container__list__item">Желаем удачи!</li>
+                    </ul>
+                  </div>
+                </div>
+            {% else %}
+                <div class="content">
+                  <div class="content__container">
+                    <ul class="content__container__list">
+                      <li class="content__container__list__item">Приветствуем Вас!</li>
+                      <li class="content__container__list__item">Спасибо, что зашли на сайт!</li>
+                        <li class="content__container__list__item">Войдите или зарегистрируйтесь, чтобы иметь доступ ко всем возможностям!</li>
+                      <li class="content__container__list__item">Желаем удачи!</li>
+                    </ul>
+                  </div>
+                </div>
+            {% endif %}
+        </div>-->
+        <div class="container ">
+        <div class="jumbotron" style="background-color: white">
+                  <h2 class="display-4" style="text-align: center; font-size: 35px; margin-top: -5%">Сайт учителя математики Вадима Витальевича Кочагина</h2>
+                  <p class="lead" style="text-align: center">Главная задача сайта – помочь каждому ученику в путешествии в мир математики.</p>
+                  <hr class="my-4">
+                    <div class="row" style="text-align: center">
+                        <div class="col-lg-4">
+                            <h5><a href="/news" style="color: #000 !important;
+                            text-decoration: none">
+                                Последние новости</a>
+                            </h5>
+                            <table class="table">
+                            <tbody>
+                                {% for new in last_news %}
+                                    <tr>
+                                        <td>
+                                            <a href="/view_new/{{ new.id }}" style="color: #000 !important;
+                            text-decoration: none">
+                                                {{ new.title }}
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                            </table>
+                        </div>
+                        <div class="col-lg-4">
+                            <h5><a href="/photos" style="color: #000 !important;
+                            text-decoration: none">Последние фото</a></h5>
+                            <table class="table">
+                            <tbody>
+                                {% for photo in last_photos %}
+                                    <tr>
+                                        <td>
+                                            <a href="/photos" style="color: #000 !important;
+                            text-decoration: none">
+                                            {{ photo.text_info1 }}
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                            </table>
+
+                        </div>
+                        <div class="col-lg-4">
+                            <h5>
+                                <a href="/all_works" style="color: #000 !important;
+                            text-decoration: none">
+                                    Последние работы учеников
+                                </a></h5>
+                            <table class="table">
+                            <tbody>
+                                {% for work in last_works %}
+                                    <tr>
+                                        <td>
+                                            <a href="/view_st_work/{{ work.id }}" style="color: #000 !important;
+                            text-decoration: none">
+                                                {{ work.name }}
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+    {% if user.is_authenticated %}
+        <div class="row" style="text-align: center">
+            <div class="col-lg-12">
+                <h5>Доступные работы</h5>
+                {% for item in works %}
+                    <div class="ui-43" style="background-color: lightgrey">
+
+			<!--  Update list block  -->
+                        <div class="update-list">
+                            <a href="/kr_fio/{{ item.work.id }}" style="color: #000 !important;
+                                        text-decoration: none">
+                            <!-- Heading -->
+                            <ul class="list-unstyled">
+                                <li><span class="label label-lblue" style="text-align: center">NEW </span>
+                                        <h5 style="text-align: center">{{ item.work.name }}</h5>
+                                    <h6 style="text-align: center">{{ item.work.description }}</h6>
+                                    <h6 style="text-align: right; font-weight: lighter">
+                                        {{ item.work.time }} {{ item.word_minut }} на выполнение
+                                    </h6>
+                                </li>
+                            </ul>
+                            </a>
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+                {% for item in test_vprs %}
+                    <div class="ui-43" style="background-color: lightgrey">
+
+			<!--  Update list block  -->
+                        <div class="update-list">
+                            <a href="/test_fio/{{ item.work.id }}" style="color: #000 !important;
+                                        text-decoration: none">
+                            <!-- Heading -->
+                            <ul class="list-unstyled">
+                                <li><span class="label label-lblue" style="text-align: center">NEW </span>
+                                        <h5 style="text-align: center">{{ item.work.name }}</h5>
+                                    <h6 style="text-align: center">{{ item.work.description }}</h6>
+                                    <h6 style="text-align: right; font-weight: lighter">
+                                        {{ item.work.time }} {{ item.word_minut }} на выполнение
+                                    </h6>
+                                </li>
+                            </ul>
+                            </a>
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+                        </div>
+                    </div>
+        {% endif %}
+                <div class="owl-carousel owl-theme" style="margin-top: 5%">
+                    <div>
+                        <img src="../media/img_home_geom/cube1.png">
+                        <h5 style="text-align: center; font-style: italic">Куб</h5>
+                    </div>
+                    <div>
+                        <img src="../media/img_home_geom/dodeka2.png">
+                        <h5 style="text-align: center; font-style: italic">Додекаэдр</h5>
+                    </div>
+                    <div>
+                        <img src="../media/img_home_geom/tetraidr3.png">
+                        <h5 style="text-align: center; font-style: italic">Тетраэдр</h5>
+                    </div>
+                    <div>
+                        <img src="../media/img_home_geom/icosaidr4.png">
+                        <h5 style="text-align: center; font-style: italic">Икосаэдр</h5>
+                    </div>
+                    <div>
+                        <img src="../media/img_home_geom/oktaidr5.png">
+                        <h5 style="text-align: center; font-style: italic">Октаэдр</h5>
+                    </div>
+                </div>
+
+        </div>
+        <script src="../media/OwlCarousel/dist/owl.carousel.min.js"></script>
+        <script>$(document).ready(function(){
+            $('.owl-carousel').owlCarousel({
+                items:3,
+                loop:true,
+                margin:10,
+                autoplay:true,
+                autoplayTimeout:3000,
+                autoplayHoverPause:true,
+                smartSpeed: 3000,
+            });
+            });
+        </script>
+    <!--<div class="container">
+    <form id="test_form" action="/" method="post">
+        {% csrf_token %}
+        Имя: <input type="text" id="name1" name="name1" onchange="SendForm()" />
+        <input type="text" id="name1" name="name1" />
+        </form>
+<br />
+        <script type="text/javascript">
+      function SendForm() {
+        var name1 = document.getElementById('name1').value;
+        alert(name1);
+    $.ajax({
+        type: 'POST',
+       url: '/ajjja/',
+        data: {'name1' : name1},
+        cache: false,
+        success: function(){
+            console.log('aaaaa');
+        }
+    });
+    }
+    </script>
+</div>-->
+{% endblock %}

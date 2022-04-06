@@ -1,0 +1,56 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="ui-60">
+
+			<div class="container">
+				<div class="row">
+
+					<div class="col-md-12">
+
+						<!-- Pricing item -->
+                        {% for item in all_groups %}
+						<div class="ui-item clearfix">
+
+							<a href="/group_info/{{ item.group.id }}" class="ui-price bg-green circle">
+							</a>
+
+							<div class="ui-plan">
+								<!-- Plan name -->
+                                <h4>
+                                    <a href = '/group_info/{{ item.group.id }}'
+                                       style="color: #000 !important;
+                                        text-decoration: none">{{ item.group.name }}
+                                    </a>
+                                </h4>
+								<!-- Plan details -->
+                                <p>{{item.kol_member }} участников</p>
+								<p>{{ group.description }}</p>
+
+							</div>
+
+						</div>
+                        {% endfor %}
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+    <div class="container" style="margin-top: 1%;">
+        <div class="row justify-content-md-center">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-5 text-center">Создать новую группу</legend>
+                {{ new_group_form|crispy }}
+            </fieldset>
+            <div class="form-group text-center">
+                <button class="btn btn-primary" type="submit">Создать</button>
+            </div>
+        </form>
+        </div>
+    </div>
+
+{% endblock %}

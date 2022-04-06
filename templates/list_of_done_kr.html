@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="/media/checkbox_style.css" media="screen">
+    <div class="container">
+        <div class="row justify-content-center">
+            <form style="width: 45%" action="" method="post">
+            {% csrf_token %}
+                <p>
+                        <h2 style="text-align: center"> Список выполнивших</h2>
+                        <h2 style="text-align: center"> {{ kr.name }}</h2>
+                        {% for people in all_ppl %}
+                          <div class="inputGroup">
+                              <input id={{ people.idd }} name={{ people.idd }} type="checkbox" checked/>
+                              <label for={{ people.idd }}> {{ people.us.last_name }} {{ people.us.first_name }}</label>
+                          </div>
+                        {% endfor %}
+
+                </p>
+
+                <input type="submit" class="btn btn-primary btn-lg btn-block" value="Сохранить"></input>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

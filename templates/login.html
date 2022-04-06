@@ -1,0 +1,27 @@
+{% extends "main.html" %}
+{%  load crispy_forms_tags %}
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="/media/login.css">
+
+
+<form action="" method="POST">
+    {% csrf_token %}
+  <h2>Вход в систему</h2>
+        <p>
+			<label for="Username" class="floatLabel">Имя пользователя</label>
+			<input id="Username" name="Username" type="text">
+		</p>
+		<p>
+			<label for="password" class="floatLabel">Пароль</label>
+			<input id="password" name="password" type="password">
+		</p>
+
+        <p>
+			<input type="submit" value="Войти в систему" id="submit">
+            <h6> Забыли пароль? <a href="/reset_password">Восстановить</a></h6>
+		</p>
+	</form>
+
+    <!--<script type="text/javascript" src="/media/login.js">
+    </script>-->
+{% endblock %}

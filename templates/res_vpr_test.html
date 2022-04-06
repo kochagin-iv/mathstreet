@@ -1,0 +1,47 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="container">
+    <div class="d-flex justify-content-center">
+        <H3>Ваш результат: {{ kol_corr }} / {{ kol_q }} правильных ответов</H3>
+    </div>
+    </div>
+    {% for quest in quests %}
+        <div class="container">
+        {% if quest.my_ans == quest.corr_ans %}
+            <div class="jumbotron" style="background-color: darkseagreen">
+                <H2 style="text-align: center; text-decoration-style: inherit">Вопрос {{  quest.kol }}</H2>
+                    <p class="lead">
+                        {{ quest.qst.description | safe }}
+                    </p>
+
+                    <p>
+                    Мой ответ {{ quest.my_ans }}<br>
+                        Верный ответ {{ quest.corr_ans }}
+                    </p>
+            </div>
+
+        {% else %}
+            <div class="jumbotron" style="background-color: #FFC0CB">
+                <H2 style="text-align: center; text-decoration-style: inherit">Вопрос {{  quest.kol }}</H2>
+                    <p class="lead">
+                        {{ quest.qst.description | safe }}
+                    </p>
+
+                    <p>
+                    Мой ответ {{ quest.my_ans }}<br>
+                        Верный ответ {{ quest.corr_ans }}
+                    </p>
+            </div>
+        {% endif %}
+        </div>
+    {% endfor %}
+    <div class="container">
+    <div class="d-flex justify-content-center">
+        <a href = '/' style="left: 50%;" class="btn btn-primary btn-lg"> Вернуться на главную страницу</a>
+    </div>
+    </div>
+
+{% endblock %}

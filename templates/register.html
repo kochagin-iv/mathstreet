@@ -1,0 +1,42 @@
+{% extends "main.html" %}
+{%  load crispy_forms_tags %}
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="/media/login.css">
+
+
+<form action="" method="POST">
+{% csrf_token %}
+  <h2>Регистрация</h2>
+        <p>
+			<label for="Username" class="floatLabel">Имя пользователя(на английском)</label>
+			<input id="Username" name="Username" type="text" required>
+		</p>
+		<p>
+			<label for="Email" class="floatLabel">Почта</label>
+			<input id="Email" name="Email" type="text" required>
+		</p>
+		<p>
+			<label for="password" class="floatLabel">Пароль</label>
+			<input id="password" name="password" type="password" required>
+			<span>Введите пароль длинной от 8 символов</span>
+		</p>
+		<p>
+			<label for="confirm_password" class="floatLabel">Подтверждение пароля</label>
+			<input id="confirm_password" name="confirm_password" type="password" required>
+			<span>Ваши пароли не совпадают</span>
+		</p>
+        <p>
+			<label for="First_name" class="floatLabel">Ваше имя</label>
+			<input id="First_name" name="First_name" type="text" required>
+		</p>
+        <p>
+			<label for="Second_name" class="floatLabel">Ваша фамилия</label>
+			<input id="Second_name" name="Second_name" type="text" required>
+		</p>
+        <p>
+			<input type="submit" value="Создать аккаунт" id="submit">
+		</p>
+	</form>
+    <script type="text/javascript" src="/media/login.js">
+    </script>
+{% endblock %}

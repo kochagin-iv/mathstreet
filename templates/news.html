@@ -1,0 +1,50 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <link href="/media/font-awesome.min.css" rel="stylesheet">
+
+
+		<link href="/media/news.css" rel="stylesheet">
+
+    <div class="content">
+        <h3 style="text-align: center"> Новости</h3>
+    </div>
+		<div class="ui-200">
+
+			<div class="container">
+				<div class="row">
+                    {% for new in news %}
+                        <div class="col-md-6 col-sm-6">
+                            <!-- Item -->
+                            <div class="ui-item bg-green">
+                                <!-- Heading -->
+                                <div class="heading">
+                                    <h2><a href="/view_new/{{ new.id }}">Математика</a></h2>
+                                </div>
+                                <!-- Content -->
+                                <div class="content">
+                                    <h3><a href="/view_new/{{ new.id }}"><i class="fa fa-angle-right br-green green"></i> {{ new.title }} </a></h3>
+                                    <p>{{ new.short_text }}</p>
+                                    <div class="row">
+                                        <a href="/view_new/{{ new.id }}" class="btn btn-green">Читать далее<i class="fa fa-angle-right"></i></a>
+                                        <a href="/view_new/{{ new.id }}" style="margin-top: 5%; margin-left: 25%">{{ new.date }}</a>
+                                    </div>
+                                    {% if user.is_superuser %}
+                                        <div class="row">
+                                            <a href="/edit_new/{{ new.id }}" class="btn btn-blue">
+                                                Редактировать
+                                                <i class="fa fa-refresh"></i>
+                                            </a>
+                                            <a href="/delete_new/{{ new.id }}" class="btn btn-red" style="margin-left: 20%">
+                                                Удалить <i class="fa fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+				</div>
+            </div>
+		</div>
+{% endblock %}

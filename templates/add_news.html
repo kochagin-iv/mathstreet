@@ -1,0 +1,28 @@
+{% extends 'main.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="/media/checkbox_style.css" media="screen">
+    <div class="container">
+    <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form|crispy }}
+            <form style="width: 70%">
+            <p>
+                    <h2 style="text-align: center">Выбор групп</h2>
+                    {% for group in groups %}
+                      <div class="inputGroup">
+                          <input id={{ group.idd }} name={{ group.idd }} type="checkbox"/>
+                          <label for={{ group.idd }}>{{ group.name }}</label>
+                      </div>
+                    {% endfor %}
+
+            </p>
+
+        <input type="submit" class="btn btn-primary btn-lg btn-block" value="Создать">
+      </form>
+      </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.min.js"></script>
+      <script type="text/javascript" src="/media/sketch.js"></script>
+      <div id="test" value={{ time }}></div>
+    <div class="container" style="position: sticky; top: 0" >
+        <h2 style="text-align: center">Оставшееся время: <a id="timer" style="font-size: 30px">______</a></h2>
+    </div>
+    <form action="" method="post" name="form" id="form" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for quest in quests %}
+        <div class="container">
+        <div class="jumbotron">
+            <H2 style="text-align: center; text-decoration-style: inherit">Задание {{  quest.kol }}</H2>
+                <p class="lead">
+                    {{ quest.qst.description | safe }}
+                </p>
+                <p class="lead">
+                    {% if quest.qst.file != '' %}
+                        <a href="/media/{{ quest.qst.file }}" target="_blank">Посмотреть приложенный файл</a>
+                    {% endif %}
+                </p>
+                <p class="lead">
+                    <h6 style="text-align: right; font-weight: lighter">
+                        Количество баллов за задание: {{ quest.qst.points }}
+                    </h6>
+                </p>
+            {% if quest.qst.ans_text %}
+                {{ quest.form | crispy }}
+            {% endif %}
+            {% if quest.qst.ans_file %}
+                <!--<div style="visibility: hidden">
+                    {{ quest.form | crispy }}
+                </div>-->
+                <input type="file" name="f{{ quest.kol }}ex{{ quest.qst.id }}">
+                <label for="f{{ quest.kol }}ex{{ quest.qst.id }}"> Выберите файл - ответ на задание</label>
+            {% endif %}
+        </div>
+        </div>
+    {% endfor %}
+    <div class="container">
+    <div class="d-flex justify-content-center">
+        <button type="submit" class="touch btn btn-primary btn-lg" style="left: 50%;" onclick="this.parentNode.submit();">Завершить выполнение работы</button>
+    </div>
+    </div>
+    </form>
+
+{% endblock %}
