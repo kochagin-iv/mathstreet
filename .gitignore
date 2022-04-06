@@ -132,3 +132,4 @@ dmypy.json
 #Special dirs
 media/
 static/
+.DS_STORE
